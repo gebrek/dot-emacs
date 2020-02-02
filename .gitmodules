@@ -1,3 +1,9 @@
 [submodule "upstream/racket-mode"]
 	path = upstream/racket-mode
 	url = git@github.com:greghendershott/racket-mode.git
+[submodule "upstream/magit"]
+	path = upstream/magit
+	url = git@github.com:magit/magit.git
+[submodule "upstream/forge"]
+	path = upstream/forge
+	url = git@github.com:magit/forge.git

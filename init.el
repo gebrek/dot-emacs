@@ -17,6 +17,7 @@
 (setf mouse-wheel-scroll-amount '(1)
       mouse-wheel-progressive-speed nil
       mouse-wheel-tilt-scroll t
+      mouse-wheel-flip-direction t
       overflow-newline-into-fringe t
       indicate-buffer-boundaries 'left
       indicate-empty-lines t
@@ -49,6 +50,8 @@ adds it to `load-path'."
 (upstream "racket-mode")
 ;; (upstream "geiser")
 ;; (upstream "geiser/build/elisp/geiser-load")
+(upstream "magit")
+(upstream "forge")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Start the server, init should only need to be loaded once per
 ;;; session.
@@ -149,7 +152,9 @@ adds it to `load-path'."
 
 (use-package ace-window
   :ensure t
-  :bind (("C-c o" . 'ace-window)))
+  :bind (("C-c o" . 'ace-window))
+  :config
+  (setf aw-scope 'frame))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; God's own porcelain
@@ -306,6 +311,7 @@ adds it to `load-path'."
   (elfeed-update))
 
 (use-package easy-hugo :ensure t
+  :bind (("C-c b" . 'easy-hugo))
   :config
   (setf easy-hugo-basedir "/home/jas/hugo/blog/"
 	easy-hugo-postdir "content/posts"))
