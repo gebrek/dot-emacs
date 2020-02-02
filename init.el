@@ -159,6 +159,8 @@ adds it to `load-path'."
 	 ("C-c g b" . 'magit-blame-popup)
 	 ("C-c g c" . 'counsel-git)))
 
+(use-package magithub :ensure t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; The Mother of all Markup
 
