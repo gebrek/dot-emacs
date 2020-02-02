@@ -310,7 +310,6 @@ adds it to `load-path'."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Referencers
-(add-to-list 'load-path )
 (use-package bbdb :ensure t
   :config
   (setf bbdb-check-postcode nil
