@@ -1,0 +1,3 @@
+[submodule "upstream/racket-mode"]
+	path = upstream/racket-mode
+	url = git@github.com:greghendershott/racket-mode.git
