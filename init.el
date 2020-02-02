@@ -23,11 +23,27 @@
       inhibit-startup-screen t
       dired-listing-switches "-Fal"
       custom-file "~/.emacs.d/custom.el"
+      upstream-dir "~/.emacs.d/upstream/"
       load-prefer-newer t)
 
 (if (file-exists-p custom-file)
     (load custom-file))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Manually installed packages
+(defun upstream (package)
+  "Return the path of a package being maintained through git, and
+adds it to `load-path'."
+  (let ((path (concat upstream-dir package)))
+    (add-to-list 'load-path path)
+    path))
+(upstream "use-package")
+(upstream "swiper")
+(upstream "org-mime")
+(upstream "elfeed")
+(upstream "emms")
+(upstream "bbdb")
+(upstream "org-journal")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Start the server, init should only need to be loaded once per
 ;;; session.
@@ -43,7 +59,6 @@
 	("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 
-(add-to-list 'load-path "~/.emacs.d/upstream/use-package")
 (require 'use-package)
 (require 'bind-key)
 
@@ -104,7 +119,6 @@
 ;;; Improved Interface Modes
 
 ;;; Incremental Vertical completYon
-(add-to-list 'load-path "~/.emacs.d/upstream/swiper")
 (require 'ivy)
 (require 'swiper)
 (require 'counsel)
@@ -256,10 +270,8 @@
 	mu4e-view-show-images t))
 
 ;; (use-package htmlize :ensure t)
-(add-to-list 'load-path "~/.emacs.d/upstream/org-mime")
 (use-package org-mime)
 
-(add-to-list 'load-path "~/.emacs.d/upstream/elfeed")
 (use-package elfeed
   :init 
   (use-package emms :ensure t
@@ -298,6 +310,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Referencers
+(add-to-list 'load-path )
 (use-package bbdb :ensure t
   :config
   (setf bbdb-check-postcode nil
