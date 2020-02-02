@@ -50,8 +50,8 @@ adds it to `load-path'."
 (upstream "racket-mode")
 ;; (upstream "geiser")
 ;; (upstream "geiser/build/elisp/geiser-load")
-(upstream "magit")
-(upstream "forge")
+;; (upstream "magit")  ; something about libgit2 bindings not existing
+;; (upstream "forge")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Start the server, init should only need to be loaded once per
 ;;; session.
@@ -163,6 +163,8 @@ adds it to `load-path'."
   :bind (("C-c g g" . 'magit-status)
 	 ("C-c g b" . 'magit-blame-popup)
 	 ("C-c g c" . 'counsel-git)))
+
+(use-package forge :ensure t)
 
 (use-package magithub :ensure t)
 

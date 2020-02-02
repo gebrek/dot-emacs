@@ -15,7 +15,7 @@
  '(global-auto-revert-mode t)
  '(package-selected-packages
    (quote
-    (magithub geiser elisp-mode emms company counsel-bbdb bbdb ox-hugo easy-hugo offlineimap calfw-org calfw org-pdfview pdf-tools org-mru-clock org-journal magit ace-window treemacs which-key ivy hide-mode-line circadian tao-theme paredit diminish delight)))
+    (forge magithub geiser elisp-mode emms company counsel-bbdb bbdb ox-hugo easy-hugo offlineimap calfw-org calfw org-pdfview pdf-tools org-mru-clock org-journal magit ace-window treemacs which-key ivy hide-mode-line circadian tao-theme paredit diminish delight)))
  '(send-mail-function (quote smtpmail-send-it)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
