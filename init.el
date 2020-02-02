@@ -25,13 +25,20 @@
       dired-listing-switches "-Fal"
       custom-file "~/.emacs.d/custom.el"
       upstream-dir "~/.emacs.d/upstream/"
+      dribble-dir "~/.emacs.d/dribble/"
       load-prefer-newer t)
 
 (if (file-exists-p custom-file)
     (load custom-file))
 
-(open-dribble-file "~/.emacs.d/dribble")
+(defun try-open-dribble-file (&optional m)
+  (let* ((n (or m 0))
+	 (df (concat dribble-dir (number-to-string n))))
+    (if (file-exists-p df)
+	(try-open-dribble-file (1+ n))
+      (open-dribble-file df))))
 
+(try-open-dribble-file 0)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Manually installed packages
 (defun upstream (package)
@@ -257,6 +264,8 @@ adds it to `load-path'."
 
 (use-package offlineimap :ensure t)
 
+(add-to-list 'load-path "/home/jas/Repos/mu/mu4e")
+(require 'mu4e-meta)
 (use-package mu4e
   :bind (("C-c m" . 'mu4e)
 	 :map mu4e-headers-mode-map
