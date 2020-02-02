@@ -38,12 +38,15 @@ adds it to `load-path'."
     (add-to-list 'load-path path)
     path))
 (upstream "use-package")
-(upstream "swiper")
 (upstream "org-mime")
+(upstream "org-journal")
+(upstream "swiper")
 (upstream "elfeed")
 (upstream "emms")
 (upstream "bbdb")
-(upstream "org-journal")
+(upstream "racket-mode")
+;; (upstream "geiser")
+;; (upstream "geiser/build/elisp/geiser-load")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Start the server, init should only need to be loaded once per
 ;;; session.
@@ -86,9 +89,7 @@ adds it to `load-path'."
 
 (use-package paredit
   :ensure t
-  :delight " ()"
-  ;; :hook ((emacs-lisp-mode . paredit-mode))
-  )
+  :delight " ()")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Rest Thine Eyes
@@ -148,7 +149,6 @@ adds it to `load-path'."
   :ensure t
   :bind (("C-c o" . 'ace-window)))
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; God's own porcelain
 (use-package magit
@@ -168,6 +168,7 @@ adds it to `load-path'."
 	 :map org-mode-map
 	 ("C-c ," . 'org-time-stamp-inactive))
   :config
+  (add-to-list 'org-mode-hook 'auto-fill-mode)
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((shell . t)
@@ -175,6 +176,7 @@ adds it to `load-path'."
   (setf
    org-clock-in-switch-to-state nil
    org-clock-out-remove-zero-time-clocks t
+   org-adapt-indentation nil
    org-capture-templates
    '(("c" "Clock entry" entry
       (file+headline "~/org/life.org" "Clocks")
@@ -299,8 +301,6 @@ adds it to `load-path'."
 	  ))
   (elfeed-update))
 
-
-
 (use-package easy-hugo :ensure t
   :config
   (setf easy-hugo-basedir "/home/jas/hugo/blog/"
@@ -335,5 +335,10 @@ adds it to `load-path'."
   :config
   (add-to-list 'emacs-lisp-mode-hook 'paredit-mode))
 
+(use-package racket-mode
+  :config
+  (add-to-list 'racket-mode-hook 'geiser-mode))
+;;; upstreaming didn't work?
+(use-package geiser :ensure t)
 
 ;;; init.el ends here
