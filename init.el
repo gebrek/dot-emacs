@@ -361,6 +361,7 @@ adds it to `load-path'."
 
 (use-package elisp-mode
   :config
+  (delight 'emacs-lisp-mode "Elisp" t)
   (add-hook 'emacs-lisp-mode-hook 'paredit-mode))
 
 (use-package racket-mode
