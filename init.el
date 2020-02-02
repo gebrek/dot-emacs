@@ -119,13 +119,16 @@ adds it to `load-path'."
 			     (:sunset . tao-yin)))))
 (circadian-setup)
 
-(set-face-attribute 'default nil
-		    :family "Fira Mono"
-		    :foundry "CTDB"
-		    :slant 'normal
-		    :weight 'normal
-		    :height 158
-		    :width 'normal)
+(defun load-fira-mono ()
+  (interactive)
+  (set-face-attribute 'default nil
+		      :family "Fira Mono"
+		      :foundry "CTDB"
+		      :slant 'normal
+		      :weight 'normal
+		      :height 158
+		      :width 'normal))
+(load-fira-mono)
 (use-package hide-mode-line :ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -140,7 +143,8 @@ adds it to `load-path'."
   :bind (("C-c s" . 'swiper)
 	 ("C-c r" . 'ivy-resume)
 	 ("C-c f d" . counsel-describe-face)
-	 ("C-c f f" . 'counsel-faces))
+	 ("C-c f f" . 'counsel-faces)
+	 ("C-c f r" . 'load-fira-mono))
   :init
   (ivy-mode +1))
 
