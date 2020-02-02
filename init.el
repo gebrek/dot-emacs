@@ -29,6 +29,8 @@
 (if (file-exists-p custom-file)
     (load custom-file))
 
+(open-dribble-file "~/.emacs.d/dribble")
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Manually installed packages
 (defun upstream (package)
@@ -125,10 +127,10 @@ adds it to `load-path'."
 (require 'counsel)
 (use-package ivy
   :diminish
-  :bind (("C-c C-s" . 'swiper)
-	 ("C-c C-r" . 'ivy-resume)
-	 ("C-c C-f d" . counsel-describe-face)
-	 ("C-c C-f f" . 'counsel-faces))
+  :bind (("C-c s" . 'swiper)
+	 ("C-c r" . 'ivy-resume)
+	 ("C-c f d" . counsel-describe-face)
+	 ("C-c f f" . 'counsel-faces))
   :init
   (ivy-mode +1))
 
@@ -153,9 +155,9 @@ adds it to `load-path'."
 ;;; God's own porcelain
 (use-package magit
   :ensure t
-  :bind (("C-c C-g g" . 'magit-status)
-	 ("C-c C-g b" . 'magit-blame-popup)
-	 ("C-c C-g c" . 'counsel-git)))
+  :bind (("C-c g g" . 'magit-status)
+	 ("C-c g b" . 'magit-blame-popup)
+	 ("C-c g c" . 'counsel-git)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; The Mother of all Markup
