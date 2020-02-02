@@ -129,7 +129,7 @@ adds it to `load-path'."
 		      :foundry "CTDB"
 		      :slant 'normal
 		      :weight 'normal
-		      :height 158
+		      :height 154
 		      :width 'normal))
 (load-fira-mono)
 (use-package hide-mode-line :ensure t)
@@ -162,7 +162,8 @@ adds it to `load-path'."
   :ensure t
   :bind (("C-c t" . treemacs))
   :config
-  (setf treemacs-indentation 1))
+  (setf treemacs-indentation 1
+	treemacs-width 30))
 
 (use-package ace-window
   :ensure t
