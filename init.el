@@ -59,6 +59,7 @@ adds it to `load-path'."
 ;; (upstream "geiser/build/elisp/geiser-load")
 ;; (upstream "magit")  ; something about libgit2 bindings not existing
 ;; (upstream "forge")
+(upstream "fira-code-emacs")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Start the server, init should only need to be loaded once per
 ;;; session.
@@ -119,6 +120,8 @@ adds it to `load-path'."
 			     (:sunset . tao-yin)))))
 (circadian-setup)
 
+(require 'fira-code)
+(add-hook 'prog-mode-hook 'fira-code-mode)
 (defun load-fira-mono ()
   (interactive)
   (set-face-attribute 'default nil
@@ -190,7 +193,7 @@ adds it to `load-path'."
 	 :map org-mode-map
 	 ("C-c ," . 'org-time-stamp-inactive))
   :config
-  (add-to-list 'org-mode-hook 'auto-fill-mode)
+  (add-hook 'org-mode-hook 'auto-fill-mode)
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((shell . t)
@@ -358,11 +361,11 @@ adds it to `load-path'."
 
 (use-package elisp-mode
   :config
-  (add-to-list 'emacs-lisp-mode-hook 'paredit-mode))
+  (add-hook 'emacs-lisp-mode-hook 'paredit-mode))
 
 (use-package racket-mode
   :config
-  (add-to-list 'racket-mode-hook 'geiser-mode))
+  (add-hook 'racket-mode-hook 'geiser-mode))
 ;;; upstreaming didn't work?
 (use-package geiser :ensure t)
 

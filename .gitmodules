@@ -7,3 +7,6 @@
 [submodule "upstream/forge"]
 	path = upstream/forge
 	url = git@github.com:magit/forge.git
+[submodule "upstream/fira-code-emacs"]
+	path = upstream/fira-code-emacs
+	url = https://github.com/johnw42/fira-code-emacs.git
