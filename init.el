@@ -39,6 +39,7 @@
       (open-dribble-file df))))
 
 (try-open-dribble-file 0)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Manually installed packages
 (defun upstream (package)
@@ -203,6 +204,7 @@ adds it to `load-path'."
    org-clock-in-switch-to-state nil
    org-clock-out-remove-zero-time-clocks t
    org-adapt-indentation nil
+   org-ellipsis "…"
    org-capture-templates
    '(("c" "Clock entry" entry
       (file+headline "~/org/life.org" "Clocks")
@@ -265,15 +267,20 @@ adds it to `load-path'."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Comms
+(use-package eww
+  :config
+  (add-hook 'eww-mode-hook (lambda () (linum-mode -1))))
+
 (use-package erc
   :ensure t
   :config
-  (setf erc-hide-list '("JOIN" "PART" "QUIT")))
+  (setf erc-hide-list '("JOIN" "PART" "QUIT")
+	erc-prompt-for-nickserv-password nil))
 
 (use-package offlineimap :ensure t)
 
 (add-to-list 'load-path "/home/jas/Repos/mu/mu4e")
-(require 'mu4e-meta)
+
 (use-package mu4e
   :bind (("C-c m" . 'mu4e)
 	 :map mu4e-headers-mode-map
@@ -366,9 +373,28 @@ adds it to `load-path'."
   (add-hook 'emacs-lisp-mode-hook 'paredit-mode))
 
 (use-package racket-mode
+  :delight "λ"
   :config
-  (add-hook 'racket-mode-hook 'geiser-mode))
+  (add-hook 'racket-mode-hook 'geiser-mode)
+  (add-hook 'racket-mode-hook 'paredit-mode))
 ;;; upstreaming didn't work?
-(use-package geiser :ensure t)
+(use-package geiser :ensure t
+  :config
+  (add-hook 'geiser-repl-mode-hook 'paredit-mode))
 
+(use-package flymake
+  :ensure t
+  :bind (:map flymake-mode-map
+	 ("C-c ! n" . 'flymake-goto-next-error)
+	 ("C-c ! p" . 'flymake-goto-prev-error)
+	 ("C-c ! l" . 'flymake-show-diagnostics-buffer)
+	 ;; ("C-c ! !" . 'flymake-che)
+	 ))
+(use-package flymake-racket
+  :ensure t
+  :commands (flymake-racket-add-hook)
+  :init
+  (add-hook 'scheme-mode-hook #'flymake-racket-add-hook)
+  (add-hook 'racket-mode-hook #'flymake-racket-add-hook)
+  (add-hook 'racket-mode-hook #'flymake-mode-on))
 ;;; init.el ends here
