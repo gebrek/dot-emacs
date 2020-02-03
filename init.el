@@ -275,7 +275,8 @@ adds it to `load-path'."
   :ensure t
   :config
   (setf erc-hide-list '("JOIN" "PART" "QUIT")
-	erc-prompt-for-nickserv-password nil))
+	erc-prompt-for-nickserv-password nil
+	erc-fill-column 90))
 
 (use-package offlineimap :ensure t)
 
