@@ -295,16 +295,18 @@ adds it to `load-path'."
 	smtpmail-smtp-server "smtp.gmail.com"
 	smtpmail-smtp-service 25
 	mu4e-attachment-dir "/home/jas/archive"
-	mu4e-bookmarks
-	'(("flag:unread AND NOT flag:trashed date:7d..now" "Recent unread messages" 114)
-	  ("flag:unread AND NOT flag:trashed" "Unread messages" 117)
-	  ("date:today..now" "Today's messages" 116)
-	  ("date:7d..now" "Last 7 days" 119)
-	  ("mime:image/*" "Messages with images" 112))
+	;; mu4e-bookmarks
+	;; '(("flag:unread AND NOT flag:trashed date:7d..now" "Recent unread messages" 114)
+	;;   ("flag:unread AND NOT flag:trashed" "Unread messages" 117)
+	;;   ("date:today..now" "Today's messages" 116)
+	;;   ("date:7d..now" "Last 7 days" 119)
+	;;   ("mime:image/*" "Messages with images" 112))
 	mu4e-headers-results-limit 500
 	mu4e-view-prefer-html t
 	mu4e-view-show-addresses t
 	mu4e-view-show-images t))
+
+(use-package notmuch :ensure t)
 
 ;; (use-package htmlize :ensure t)
 (use-package org-mime)

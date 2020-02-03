@@ -15,6 +15,8 @@
  '(erc-server "irc.freenode.net")
  '(erc-user-full-name "JA Sonnenberg")
  '(global-auto-revert-mode t)
+ '(magithub-clone-default-directory "~/Repos/")
+ '(org-agenda-files '("~/org/life.org"))
  '(org-capture-templates
    '(("c" "Clock entry" entry
       (file+headline "~/org/life.org" "Clocks")
@@ -47,7 +49,7 @@
      ("j" "Journal entry" entry #'org-journal-find-location "* %(format-time-string org-journal-time-format)%^{Title}
 %i%?")))
  '(package-selected-packages
-   '(flymake-racket flycheck mu4e forge magithub geiser elisp-mode emms company counsel-bbdb bbdb ox-hugo easy-hugo offlineimap calfw-org calfw org-pdfview pdf-tools org-mru-clock org-journal magit ace-window treemacs which-key ivy hide-mode-line circadian tao-theme paredit diminish delight))
+   '(notmuch flymake-racket flycheck mu4e forge magithub geiser elisp-mode emms company counsel-bbdb bbdb ox-hugo easy-hugo offlineimap calfw-org calfw org-pdfview pdf-tools org-mru-clock org-journal magit ace-window treemacs which-key ivy hide-mode-line circadian tao-theme paredit diminish delight))
  '(send-mail-function 'smtpmail-send-it))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
