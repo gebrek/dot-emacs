@@ -206,7 +206,8 @@ adds it to `load-path'."
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((shell . t)
-     (ledger . t)))
+     (ledger . t)
+     (R . t)))
   (setf
    org-clock-in-switch-to-state nil
    org-clock-out-remove-zero-time-clocks t
@@ -408,4 +409,8 @@ adds it to `load-path'."
   (add-hook 'scheme-mode-hook #'flymake-racket-add-hook)
   (add-hook 'racket-mode-hook #'flymake-racket-add-hook)
   (add-hook 'racket-mode-hook #'flymake-mode-on))
+
+
+(use-package ess :ensure t)
+
 ;;; init.el ends here
