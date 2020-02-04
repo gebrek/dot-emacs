@@ -185,6 +185,13 @@ adds it to `load-path'."
 (use-package magithub :ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Database Interface
+
+(upstream "edbi-sqlite")
+(use-package edbi :ensure t)
+(use-package edbi-sqlite)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; The Mother of all Markup
 
 (use-package org
@@ -251,7 +258,8 @@ adds it to `load-path'."
 
 (use-package pdf-tools
   :ensure t
-  :init (pdf-tools-install))
+  :init (pdf-tools-install)
+  :config (add-hook 'pdf-view-mode-hook (lambda () (linum-mode -1))))
 
 (use-package org-pdfview :ensure t)
 
