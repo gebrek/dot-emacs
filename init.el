@@ -292,7 +292,7 @@ adds it to `load-path'."
 (add-to-list 'load-path "/home/jas/Repos/mu/mu4e")
 
 (use-package mu4e
-  :bind (("C-c m" . 'mu4e)
+  :bind (;("C-c m" . 'mu4e)
 	 :map mu4e-headers-mode-map
 	 ("C-c l" . 'org-mu4e-store-and-capture)
 	 :map mu4e-view-mode-map
@@ -316,7 +316,8 @@ adds it to `load-path'."
 	mu4e-view-show-addresses t
 	mu4e-view-show-images t))
 
-(use-package notmuch :ensure t)
+(use-package notmuch :ensure t
+  :bind ("C-c m" . 'notmuch))
 
 ;; (use-package htmlize :ensure t)
 (use-package org-mime)
@@ -341,6 +342,7 @@ adds it to `load-path'."
 	  "https://planet.lisp.org/rss20.xml"
 	  "http://feed.nashownotes.com/rss.xml"
 	  "http://musicforprogramming.net/rss.php"
+	  "https://feeds.feedburner.com/steveklabnik/words"
 	  ;;"https://www.gutenberg.org/cache/epub/feeds/today.rss"
 	  ;;"http://podcasts.joerogan.net/feed"
 	  ;;"http://rss.sciencedirect.com/publication/science/03043975"
@@ -367,6 +369,11 @@ adds it to `load-path'."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Language Configuration
+
+(use-package rust-mode :ensure t)
+(use-package flymake-rust :ensure t)
+(use-package racer :ensure t)
+(use-package cargo :ensure t)
 
 (use-package company
   :ensure t
@@ -414,3 +421,4 @@ adds it to `load-path'."
 (use-package ess :ensure t)
 
 ;;; init.el ends here
+(load "~/.emacs.d/personal.el")
