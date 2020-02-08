@@ -56,6 +56,7 @@ adds it to `load-path'."
 (upstream "emms")
 (upstream "bbdb")
 (upstream "racket-mode")
+(upstream "define-word")
 ;; (upstream "geiser")
 ;; (upstream "geiser/build/elisp/geiser-load")
 ;; (upstream "magit")  ; something about libgit2 bindings not existing
@@ -172,6 +173,18 @@ adds it to `load-path'."
   :config
   (setf aw-scope 'frame))
 
+(defun define-word-display-definition (message)
+  (display-message-or-buffer message "*Definition*"))
+
+(use-package define-word
+  :bind (("C-c d d" . 'define-word-at-point)
+	 ("C-c d w" . 'define-word))
+  :config
+  (setf define-word-limit 20
+	define-word-displayfn-alist
+	'((wordnik . define-word-display-definition)
+	  (openthesaurus . define-word-display-definition)
+	  (webster . define-word-display-definition))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; God's own porcelain
 (use-package magit
@@ -203,12 +216,15 @@ adds it to `load-path'."
 	 ("C-c ," . 'org-time-stamp-inactive))
   :config
   (add-hook 'org-mode-hook 'auto-fill-mode)
+  (add-hook 'org-mode-hook 'flyspell-mode)
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((shell . t)
      (ledger . t)
      (R . t)))
   (setf
+   org-latex-pdf-process
+   (list "latexmk -f -bibtex -pdf %f")
    org-clock-in-switch-to-state nil
    org-clock-out-remove-zero-time-clocks t
    org-adapt-indentation nil
@@ -266,13 +282,38 @@ adds it to `load-path'."
 
 (use-package calfw :ensure t)
 (use-package calfw-org :ensure t
-  :bind (("C-c d" . 'cfw:open-org-calendar)))
+  :bind (("C-c C" . 'cfw:open-org-calendar)))
 
 (use-package org-mru-clock :ensure t)
 
+(use-package bibretrieve :ensure t)
 (use-package reftex :ensure t)
 (add-hook 'latex-mode-hook
 	  'turn-on-reftex)
+(use-package org-ref :ensure t
+  :config
+  (setf org-ref-bibliography-notes "~/Documents/research/notes.org"
+	org-ref-default-bibliography '("~/Documents/research/master.bib")
+	org-ref-pdf-directory "~/Documents/research/bibtex-pdfs/"))
+
+(defun org-mode-reftex-setup ()
+  (load-library "reftex")
+  (and (buffer-file-name) (file-exists-p (buffer-file-name))
+       (progn
+	 ;;enable auto-revert-mode to update reftex when bibtex file changes on disk
+	 (global-auto-revert-mode t)
+	 (reftex-parse-all)
+	 ;;add a custom reftex cite format to insert links
+	 (reftex-set-cite-format
+	  '((?b . "[[bib:%l][%l-bib]]")
+	    (?n . "[[notes:%l][%l-notes]]")
+	    (?p . "[[papers:%l][%l-paper]]")
+	    (?t . "%t")
+	    (?h . "** %t\n:PROPERTIES:\n:Custom_ID: %l\n:END:\n[[papers:%l][%l-paper]]")))))
+  (define-key org-mode-map (kbd "C-c )") 'reftex-citation)
+  (define-key org-mode-map (kbd "C-c (") 'org-mode-reftex-search))
+
+(add-hook 'org-mode-hook 'org-mode-reftex-setup)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Comms
@@ -343,6 +384,9 @@ adds it to `load-path'."
 	  "http://feed.nashownotes.com/rss.xml"
 	  "http://musicforprogramming.net/rss.php"
 	  "https://feeds.feedburner.com/steveklabnik/words"
+	  "https://fivethirtyeight.com/politics/feed/"
+	  "http://feeds.feedburner.com/realclearpolitics/qlMj"
+	  "https://feedpress.me/drudgereportfeed"
 	  ;;"https://www.gutenberg.org/cache/epub/feeds/today.rss"
 	  ;;"http://podcasts.joerogan.net/feed"
 	  ;;"http://rss.sciencedirect.com/publication/science/03043975"
@@ -370,10 +414,16 @@ adds it to `load-path'."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Language Configuration
 
-(use-package rust-mode :ensure t)
 (use-package flymake-rust :ensure t)
-(use-package racer :ensure t)
+(use-package racer :ensure t
+  :config
+  (setf racer-rust-src-path "/home/jas/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"))
 (use-package cargo :ensure t)
+(use-package rust-mode :ensure t
+  :config
+  (add-hook 'rust-mode-hook 'flymake-mode)
+  (add-hook 'rust-mode-hook 'racer-mode)
+  (add-hook 'rust-mode-hook 'cargo-minor-mode))
 
 (use-package company
   :ensure t

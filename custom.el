@@ -9,6 +9,7 @@
  '(custom-safe-themes
    '("801a567c87755fe65d0484cb2bded31a4c5bb24fd1fe0ed11e6c02254017acb2" default))
  '(debug-on-error t)
+ '(ebib-bib-search-dirs '("~/"))
  '(elfeed-feeds
    '("http://feeds.podtrac.com/zKq6WZZLTlbM" "https://feeds.fireside.fm/verybadwizards/rss" "http://lambda-the-ultimate.org/rss.xml" "https://www.joelonsoftware.com/feed/" "https://planet.lisp.org/rss20.xml" "http://feed.nashownotes.com/rss.xml" "http://musicforprogramming.net/rss.php"))
  '(erc-nick "gebrek")
@@ -49,7 +50,8 @@
      ("j" "Journal entry" entry #'org-journal-find-location "* %(format-time-string org-journal-time-format)%^{Title}
 %i%?")))
  '(package-selected-packages
-   '(cargo racer ess edbi notmuch flymake-racket flycheck mu4e forge magithub geiser elisp-mode emms company counsel-bbdb bbdb ox-hugo easy-hugo offlineimap calfw-org calfw org-pdfview pdf-tools org-mru-clock org-journal magit ace-window treemacs which-key ivy hide-mode-line circadian tao-theme paredit diminish delight))
+   '(ivy-bibtex gscholar-bibtex ebib bibretrieve org-ref flymake-rust cargo racer ess edbi notmuch flymake-racket flycheck mu4e forge magithub geiser elisp-mode emms company counsel-bbdb bbdb ox-hugo easy-hugo offlineimap calfw-org calfw org-pdfview pdf-tools org-mru-clock org-journal magit ace-window treemacs which-key ivy hide-mode-line circadian tao-theme paredit diminish delight))
+ '(safe-local-variable-values '((reftex-default-bibliography "./master.bib")))
  '(send-mail-function 'smtpmail-send-it))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
